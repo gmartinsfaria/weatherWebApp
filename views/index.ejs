@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ("./partials/header.ejs") %>
+<body>
+
+    
+    <div class="navbar navbar-dark bg-transparent">
+        <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" 
+            stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24">
+            <path d="M11.473 11a4.5 4.5 0 0 0-8.72-.99A3 3 0 0 0 3 16h8.5a2.5 2.5 0 0 0 0-5z"/>
+            <path d="M10.5 1.5a.5.5 0 0 0-1 0v1a.5.5 0 0 0 1 0zm3.743 1.964a.5.5 0 1 0-.707-.707l-.708.707a.5.5 0 0 0 .708.708zm-7.779-.707a.5.5 0 0 0-.707.707l.707.708a.5.5 0 1 0 .708-.708zm1.734 3.374a2 2 0 1 1 3.296 2.198q.3.423.516.898a3 3 0 1 0-4.84-3.225q.529.017 1.028.129m4.484 4.074c.6.215 1.125.59 1.522 1.072a.5.5 0 0 0 .039-.742l-.707-.707a.5.5 0 0 0-.854.377M14.5 6.5a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z"/><circle cx="12" cy="13" r="4"></circle></svg>
+            <strong>Farias's Weather Forecast</strong>
+          </a>
+        </div>
+    </div>
+
+    
+
+    <form id="myForm" method="POST" class="col-sm-6 container mt-4 search-container">
+      <select name="location" class="form-control" placeholder="Search for the weather forecast for a specific location">
+        <option value="" class="first-option" disabled selected>Select a city</option>
+        <option value="Aveiro">Aveiro</option>
+        <option value="Beja">Beja</option>
+        <option value="Braga">Braga</option>
+        <option value="Bragança">Bragança</option>
+        <option value="Coimbra">Coimbra</option>
+        <option value="Castelo Branco">Castelo Branco</option>
+        <option value="Évora">Évora</option>
+        <option value="Faro">Faro</option>
+        <option value="Guarda">Guarda</option>
+        <option value="Leiria">Leiria</option>
+        <option value="Lisboa">Lisboa</option>
+        <option value="Portalegre">Portalegre</option>
+        <option value="Porto">Porto</option>
+        <option value="Santarém">Santarém</option>
+        <option value="Setúbal">Setúbal</option>
+        <option value="Viana do Castelo">Viana do Castelo</option>
+        <option value="Vila Real">Vila Real</option>
+        <option value="Viseu">Viseu</option>
+      </select>
+      <button id="send" class="btn btn-light" type="submit" value="OK" formaction="/location-forecast">OK</button>
+    </form>
+
+
+    <div class="container col-xxl-8 px-4 py-5 ml-5">
+        <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+            <img class="d-block mx-lg-auto img-fluid weather-icon"  
+            <% if(locals.icon){ %>
+              src="https://openweathermap.org/img/wn/<%= icon %>@2x.png"
+            
+            <% }else { %>
+              src="./imgs/weather_default.png"
+            <% } %>
+            
+            alt="Bootstrap Themes" width="100" height="100" loading="lazy">
+          </div>
+
+          <div class="col-lg-6">
+            <% if (locals.location){ %>
+              <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3 white"><%= location %></h1>
+            <% } %>
+            
+            <% if(locals.weather) {%>
+            <p class="lead"><b>Weather conditions:</b> <%= weather %></p>
+            <% } %>
+
+            <% if(locals.temperature) {%>
+              <p class="lead"><b>Temperature:</b> <%= temperature %>°C</p>
+            <% } %>
+
+            <% if(locals.min && locals.max) {%>
+              <p class="lead"><b>Minimum:</b> <%= min %>°C | <b>Maximum:</b> <%= max %>°C</p>
+            <% } %>
+
+            <% if(locals.humidity) {%>
+              <p class="lead"><b>Humidity:</b> <%= humidity %>%</p>
+            <% } %>
+
+            <% if(locals.wind) {%>
+              <p class="lead"><b>Wind:</b> <%= wind %> meters per second</p>
+            <% } %>
+
+            <% if(locals.nothing) {%>
+              <p class="lead"><b></b> <%= nothing %></p>
+            <% } %>
+
+
+          </div>
+        </div>
+    </div>
+    
+
+    
+
+    <%- include ("./partials/footer.ejs") %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+
